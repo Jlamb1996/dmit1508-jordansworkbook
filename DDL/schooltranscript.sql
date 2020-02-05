@@ -47,7 +47,7 @@ Enrolled		bit			not null,
 create table Courses
 (
 
-Number		varchar(50) 
+Number		varchar(10) 
 constraint PK_Courses_Number
 			Primary key			not null,
 Name		varchar(50) not null,
@@ -95,9 +95,15 @@ primary key (StudentID, CourseNumber)
 )
 
 
+Insert into Students (StudentID,GivenName, Surname,DateOfBirth,Enrolled)
+values ('1','Jordan','Lamb','19960401 2:00 pm', 1),
+		('2', 'Avril','Lamb', '19980820 5:00 am', 66)
+
+select * from Students
+
 
 				
-
+				
 
 
 
