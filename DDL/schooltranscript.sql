@@ -156,9 +156,16 @@ on students (surname)
 -- alter table
 
 alter table students
-add PostalCode char(6) NULL,
--- adding this as a nullable column because we dont have the postal codes for the students that already exist
+add PostalCode char(6) NULL
+-- adding this as a nullable column because we dont have the postal codes for the students that already exist.--
 
+go --  i have to break the above code as a batch from the follwoing
+
+
+alter table students 
+add constraint ck_students_postalcode
+
+check (postalcode like '[a-z][0-9][a-z][0-9][a-z][0-9]')
 
 
 
