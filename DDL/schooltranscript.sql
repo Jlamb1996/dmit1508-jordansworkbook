@@ -1,10 +1,10 @@
 /*
 Filename: schooltranscript.sql
 *Author: jordan lamb
-*Create database SchoolTranscript
+Create database SchoolTranscript
 */
 
-
+Create database SchoolTranscript
 
 use SchoolTranscript
 go
@@ -37,7 +37,9 @@ constraint PK_Students_StudentID
 GivenName		varchar(50) not null,
 Surname			varchar(50) not null,
 DateofBirth		varchar(50) not null,
-Enrolled		bit			not null,
+Enrolled		bit			
+constraint DF_Students_Enrolled
+                      default(1)	not null
 
 )
 
@@ -51,9 +53,17 @@ Number		varchar(10)
 constraint PK_Courses_Number
 			Primary key			not null,
 Name		varchar(50) not null,
-Credits		decimal(3,1) not null,
+Credits		decimal(3,1) 
+constraint CK_Courses_Credits
+check ( credits >0 and credits <=12) not null,
+--      \        /     \       /  
+--		boolean			boolean
+--      \					/
+--               boolean
 Hours		tinyint not null,
-Active		bit not null,
+Active		bit 
+constraint DF_courses_Active
+default (1)    not null,
 Cost		money not null
 
 
@@ -95,11 +105,17 @@ primary key (StudentID, CourseNumber)
 )
 
 
+
+
 Insert into Students (StudentID,GivenName, Surname,DateOfBirth,Enrolled)
 values ('1','Jordan','Lamb','19960401 2:00 pm', 1),
 		('2', 'Avril','Lamb', '19980820 5:00 am', 66)
 
 select * from Students
+
+
+
+
 
 
 				
