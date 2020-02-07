@@ -35,8 +35,14 @@ StudentID		int
 constraint PK_Students_StudentID 
 			Primary key			not null,
 GivenName		varchar(50) not null,
-Surname			varchar(50) not null,
-DateofBirth		varchar(50) not null,
+Surname			varchar(50) 
+constraint ck_Students_Surname
+	--check (Surname LIKE '_%') 
+	check (Surname LIKE '[a-z][a-z]%')  --like allows us to do a pattern match. Two letters plsu any other chars 
+	not null,
+DateofBirth		varchar(50) 
+constraint ck_students_DateOfBirth
+check (dateofbirth < GETDATE()) not null, 
 Enrolled		bit			
 constraint DF_Students_Enrolled
                       default(1)	not null
@@ -60,11 +66,16 @@ check ( credits >0 and credits <=12) not null,
 --		boolean			boolean
 --      \					/
 --               boolean
-Hours		tinyint not null,
+Hours		tinyint 
+
+constraint ck_Courses_Hours
+check (hours >=15 and hours <=180) not null,
 Active		bit 
 constraint DF_courses_Active
 default (1)    not null,
-Cost		money not null
+Cost		money 
+constraint ck_courses_cost
+check(cost >0) not null,
 
 
 
@@ -93,12 +104,24 @@ foreign key references Courses(Number) not null,
 Year			tinyint not null,
 Term			char(3) not null,
 FinalMark		tinyint not null,
-Status			char(3) not null,
+Status			char(3) 
+
+constraint ck_StudentCourses_Status
+
+check (Status = 'E' or Status = 'C' or Status = 'W')
+
+constraint df_StudentCourses_Status
+
+default ('E')
+
 
 --table level definition for composite primary keys
 
 constraint pk_StudentCourses_StudentID_CourseNumber
-primary key (StudentID, CourseNumber) 
+primary key (StudentID, CourseNumber) ,
+constraint ck_StudentCourses_FinalMark_Status
+
+check((status = 'C' and FinalMark is not null) OR (status in ('E', 'W') and FinalMark is null))
 
 
 
@@ -113,6 +136,28 @@ values ('1','Jordan','Lamb','19960401 2:00 pm', 1),
 
 select * from Students
 
+
+--Indexes--
+
+-- for all foreign keys
+
+Create nonclustered index IX_StudentCourses_studentID
+on StudentCourses(StudentID)
+
+create nonclustered index ix_studentcourses_CourseNumber
+on studentcourses(coursenumber)
+
+-- for other columns where searching may be improtant
+
+create nonclustered index ix_students_surname
+on students (surname)
+
+
+-- alter table
+
+alter table students
+add PostalCode char(6) NULL,
+-- adding this as a nullable column because we dont have the postal codes for the students that already exist
 
 
 
