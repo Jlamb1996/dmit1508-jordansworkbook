@@ -110,9 +110,9 @@ constraint ck_StudentCourses_Status
 
 check (Status = 'E' or Status = 'C' or Status = 'W')
 
-constraint df_StudentCourses_Status
+/*constraint df_StudentCourses_Status 
 
-default ('E')
+default ('E')*/
 
 
 --table level definition for composite primary keys
@@ -122,7 +122,6 @@ primary key (StudentID, CourseNumber) ,
 constraint ck_StudentCourses_FinalMark_Status
 
 check((status = 'C' and FinalMark is not null) OR (status in ('E', 'W') and FinalMark is null))
-
 
 
 )
@@ -166,6 +165,13 @@ alter table students
 add constraint ck_students_postalcode
 
 check (postalcode like '[a-z][0-9][a-z][0-9][a-z][0-9]')
+
+alter table StudentCourses
+add constraint df_StudentCourses_Status
+
+default ('e') for [status] -- in an alter table statement the column must be specified for a default value 
+
+
 
 
 
