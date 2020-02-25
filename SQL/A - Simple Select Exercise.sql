@@ -11,13 +11,13 @@ SELECT  'Dan' + ' ' + 'Gilleland', 18 * 52, '5' + '10'
 
 -- Specify a column name with some hard-code/calculated values
 SELECT  'Dan' + ' ' + 'Gilleland' AS 'Instructor',
-        19 * 52 AS 'Weeks at the job'
+        20 * 52 AS 'Weeks at the job'
 
 -- Let's use the SELECT statement with database tables
 
 -- 1.   Select all the information from the Club table
 -- The SELECT statement produces a table of results which will consist of one or more rows of data.
-SELECT  ClubId, ClubName
+SELECT  ClubId as 'id', ClubName
 FROM    Club
 
 -- The * can be used to indicate all of the columns. But DO NOT DO THIS, or your instructor
@@ -37,7 +37,7 @@ FROM    Club
   -- Pro-Tip: Press [ctrl] + [shift] + r to "refresh" intellisense
 
 -- 2.   Select the FirstNames and LastNames of all the students
-SELECT  FirstName, LastName
+SELECT  FirstName as 'First Name', LastName as 'last name'
 FROM    Student
 -- 2.a. Repeat the above query, but using column aliases
 SELECT  FirstName AS 'First Name', LastName AS 'Last Name'
@@ -49,7 +49,8 @@ FROM    Student
 --      and sort the results by the last name
 SELECT    FirstName, LastName
 FROM      Student
-ORDER BY  LastName
+ORDER BY  LastName -- by default sorting will be in ascending order 
+
 -- 2.d. Select the first and last names of all the students,
 --      and sort the results by the last name, then by the first name
 SELECT    FirstName, LastName
