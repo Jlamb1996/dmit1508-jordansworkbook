@@ -1,5 +1,7 @@
 --SIMPLE SELECT EXERCISE 1
 
+
+
 USE [A01-School]
 GO
 
