@@ -15,6 +15,8 @@ SELECT  AVG(Mark) AS 'Average Mark',
         COUNT(Mark) AS 'How Many Marks'
 FROM    Registration
 
+select * from Registration order by courseid
+
 
 --2.	Select the average Mark of all the students who are taking DMIT104
 SELECT  AVG(Mark) AS 'Average Mark' -- Some Aggregate functions expect to work with numbers
