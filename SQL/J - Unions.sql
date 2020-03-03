@@ -2,6 +2,12 @@
 USE [A01-School]
 GO
 
+-- A union allows us to combine the result set of two or more individual select statements
+-- for the union to work, however, the number,order and data type
+-- of the columns in the Select statements must match
+-- unions are rarely used, but are helpful for certain situations
+
+
 --1.	Write a script that will produce the 'It Happened in October' display.
 --The output of the display is shown below
 /*
@@ -60,6 +66,7 @@ AS
         INNER JOIN Position P ON S.PositionID = P.PositionID
 GO
 
+select * from RollCall
 
 --2.  Create a list of course IDs and the number of students in the course and
 --    UNION that with a list of the course IDs and the MaxStudents of the course.

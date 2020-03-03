@@ -1,9 +1,11 @@
 --Subquery Exercise
+
 --Use the IQSchool database for this exercise. Each question must use a subquery in its solution.
 --**If the questions could also be solved without a subquery, solve it without one as well**
 USE [A01-School]
 GO
 
+-- note: subqueries should only return a single columns worth of data
 --1. Select the Payment dates and payment amount for all payments that were Cash
 SELECT PaymentDate, Amount
 FROM   Payment
@@ -15,7 +17,7 @@ WHERE  PaymentTypeID = -- Using the = means that the RH side must be a single va
      WHERE  PaymentTypeDescription = 'cash')
 -- Here is the Inner Join version of the above
 SELECT PaymentDate, Amount
-FROM   Payment P
+FROM   Payment as P
     INNER JOIN PaymentType PT
             ON PT.PaymentTypeID = P.PaymentTypeID
 WHERE  PaymentTypeDescription = 'cash'
@@ -24,7 +26,25 @@ WHERE  PaymentTypeDescription = 'cash'
 --2. Select The Student ID's of all the students that are in the 'Association of Computing Machinery' club
 -- TODO: Student Answer Here
 
+select StudentID
+from activity
+where ClubID = (Select ClubID from Club where ClubName = 'Association of Computing Machinery')
+
+select * from activity
+
+
+
+
 -- 2.b. Select the names of all the students in the 'Association of Computing Machinery' club. Use a subquery for your answer. When you make your answer, ensure the outmost query only uses the Student table in its FROM clause.
+
+Select FirstName + ' ' + LastName AS 'Student'
+from Student 
+where StudentID IN(
+            select StudentID
+            from activity 
+            where ClubID = 
+            (Select ClubID from Club where ClubName = 'Association of Computing Machinery'))
+
 
 --3. Select All the staff full names for staff that have taught a course.
 SELECT FirstName + ' ' + LastName AS 'Staff'
@@ -41,6 +61,10 @@ FROM Staff
 
 --4. Select All the staff full names that taught DMIT172.
 -- TODO: Student Answer Here
+select FirstName + ' ' + LastName as 'Staff'
+from staff
+where StaffID in
+(Select StaffID from Registration where CourseID = 'DMIT172')
 
 
 --5. Select All the staff full names of staff that have never taught a course

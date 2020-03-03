@@ -1,6 +1,21 @@
 --View Exercise
+
+
 USE [A01-School]
 GO
+
+-- a view is a virtual table based on the result- set of an SQL statement
+-- there are different kinds of views that we can create
+--, but the only ones that were interested in here are the kind that
+-- dont actually store any information directly 
+-- the data in a view comes from the other tables in the database 
+-- it is safe to drop a view, because the view does not store any information
+
+
+-- advantages of using a view are
+-- 1. Its a way of saving your query on the database
+-- 2. A view can, itself, be used in a From clause
+-- 3. Because its a stored query on the database, the database engine can perform some optimizations to make it run quite quickly
 
 --1.  Create a view of staff full names called StaffList.
 IF OBJECT_ID('StaffList', 'V') IS NOT NULL
