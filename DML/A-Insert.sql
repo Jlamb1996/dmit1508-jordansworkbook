@@ -15,6 +15,10 @@ GO -- Execute the code up to this point as a single batch
     INSERT INTO TableName(Comma, Separated, ListOf, ColumnNames)
     VALUES ('A', 'Value', 'Per', 'Column'),
            ('Another', 'Row', 'Of', 'Values')
+
+	when inserting values you can use subqueries ofr individual values provided the subquery returns a single value:
+
+	Insert into TableName (Comma, seperated, ListOf, ColumnName
     
     Another syntax for the INSERT statement is to use a SELECT clause in place
     of the VALUES clause. This is used for zero-to-many possible rows to insert.
@@ -48,6 +52,13 @@ FROM    Position
 WHERE   PositionID NOT IN (SELECT PositionID FROM Staff)
 --      Add Sheldon Murray as the new Assistant Dean.
 -- TODO: Student Answer Here....
+Insert into Staff(FirstName, LastName, DateHired, PositionID)
+
+values ('Sheldon', 'Murray', GETDATE(),
+(SELECT  PositionDescription
+FROM    Position
+WHERE   PositionDescription = 'Assistant Dean'))
+
 
 -- 3. There are three additional clubs being started at the school:
 --      - START - Small Tech And Research Teams
@@ -64,7 +75,18 @@ VALUES ('START', 'Small Tech And Research Teams'),
 --    people to add as new students. Write separate insert statement for each new student.
 -- TODO: Student Answer Here....
 
+Insert into student(FirstName, lastname,gender,city,province,postalcode,birthdate,BalanceOwing)
+values ('Larry', 'reid','m','Edmontonupoupoy','AB','t1e6y4','March 1, 1998','1')
 
+
+Insert into student(FirstName, lastname,gender,city,province,postalcode,birthdate,BalanceOwing)
+values ('Arthur', 'Cunningham','m','Edmonton', 'AB','T2w6t8','June 1, 1956','4')
+
+
+Insert into student(FirstName, lastname,gender,city,province,postalcode,birthdate,BalanceOwing)
+values ('Sophia', 'Cox','f','Vancouver', 'BC', 'v3s1w5','April 1,1996','67')
 -- 5. Enroll each of the students you've added into the DMIT777 course.
 --    Use 'Dan Gilleland' as the instructor. At this point, their marks should be NULL.
 -- TODO: Student Answer Here....
+
+
