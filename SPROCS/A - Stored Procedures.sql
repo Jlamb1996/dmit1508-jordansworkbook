@@ -16,8 +16,11 @@ CREATE PROCEDURE SprocName
     -- Parameters here
 AS
     -- Body of procedure here
+	
 RETURN
 GO
+
+to run the stored procedure, you simply have to call it with the exec keyword and pass in whatever data is needed for the parameters
 */
 
 
